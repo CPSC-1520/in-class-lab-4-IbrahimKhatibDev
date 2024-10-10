@@ -24,12 +24,12 @@ newOrderForm.addEventListener("submit", (event) => {
   if (isValueNotEmpty(orderItemName)){
     orderItemNameInput.classList.remove("is-invalid");
   } else {
-    orderItemNameInput.classList.add("is-Invalid");
+    orderItemNameInput.classList.add("is-invalid");
     isFormValid = false;
   }
   
   // Validate item price
-  if ( isValueNotEmpty(orderItemPrice) && isGreaterThanFive(orderItemPrice)){
+  if (isValueNotEmpty(orderItemPrice) && isGreaterThanFive(orderItemPrice)){
     orderItemPriceInput.classList.remove("is-invalid");
   } else {
     orderItemPriceInput.classList.add("is-invalid");
