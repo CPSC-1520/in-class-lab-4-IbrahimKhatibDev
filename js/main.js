@@ -6,8 +6,55 @@ const newOrderForm = document.querySelector("#new-order-form");
 newOrderForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  // Access form elements
+  const formElements = event.target.elements;
+
+  // Assigning form elements to variables
+  const orderItemNameInput = formElements["order-item-name"];
+  const orderItemName = orderItemNameInput.value.trim();
+  const orderItemPriceInput = formElements["order-item-price"];
+  const orderItemPrice = orderItemPriceInput.value;
+  const orderSizeInput = formElements["order-size"];
+  const ordersize = orderSizeInput.value;
+
+  // to track validity
+  let isFormValid = true;
+
+  // Validate item name
+  if (isValueNotEmpty(orderItemName)){
+    orderItemNameInput.classList.remove("is-invalid");
+  } else {
+    orderItemNameInput.classList.add("is-Invalid");
+    isFormValid = false;
+  }
   
-})
+  // Validate item price
+  if ( isValueNotEmpty(orderItemPrice) && isGreaterThanFive(orderItemPrice)){
+    orderItemPriceInput.classList.remove("is-invalid");
+  } else {
+    orderItemPriceInput.classList.add("is-invalid");
+    isFormValid = false;
+  }
+
+  // Validate order size
+  if (isValueNotEmpty(ordersize)) {
+    orderSizeInput.classList.remove("is-invalid");
+  } else {
+    orderSizeInput.classList.add("is-invalid");
+    isFormValid = false;
+  }
+
+  // Only add order item if form is valid
+  if (isFormValid) {
+    addOrderItem(orderItemName, parseFloat(orderItemPrice), ordersize);
+
+    orderItemNameInput.value = "";
+    orderItemPriceInput.value = "";
+    orderSizeInput.value = "";
+  } else {
+    console.log("Form is invalid. Please fill in all the fields correctly.");
+  }
+});
 
 // functions needed for assessment (do not change.)
 
